@@ -1,8 +1,32 @@
+const dataSource = require("../database/models")
+
 class Services {
     constructor(algumModelo) {
         this.algumModelo = algumModelo
     }
-    
+    async PegaTodosOsRegistros() {
+        return dataSource[this.algumModelo].findAll()
+    }
+    async PegaUmRegistroPorId(id) {
+        return dataSource[this.algumModelo].findByPk(id)
+    }
+    async criaRegistro (dadosDoRegistro) {
+        return dataSource[this.algumModelo].create(dadosDoRegistro)
+    }
+    async atualizaRegistro (dadosAtualizados, id) {
+        const listaDeRegistroAtualizados = dataSource[this.model].update(dadosAtualizados, {
+            where: {
+                id: id
+            }
+        })
+        if (listaDeRegistroAtualizados[0] === 0) {
+            return false   
+        }
+            return true
+    }
+    async excluiRegistro(id) {
+        return dataSource[this.algumModelo].destroy({where: {id:id}})
+    }
 };
 
-export default Services;
+module.exports = Services;
