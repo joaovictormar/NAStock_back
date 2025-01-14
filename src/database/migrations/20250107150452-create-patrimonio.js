@@ -12,14 +12,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      equipamento_id:{
+      equipamento_id: {
         allowNull: false,
-        references: {model: 'equipamentos' , key: 'id'},
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'equipamentos',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       patrimonio: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
+        unique: true // Garante que o patrimônio seja único
       },
       local: {
         allowNull: false,

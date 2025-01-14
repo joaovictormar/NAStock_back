@@ -10,6 +10,9 @@ class PatrimonioService extends Services {
             where: { local }
         })
     }
+    async pegaUmRegistroPorCampo(campo) {
+        return super.PegaUm(campo);
+    }
 }
 
 module.exports = PatrimonioService;

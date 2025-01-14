@@ -27,6 +27,10 @@ class Services {
     async excluiRegistro(id) {
         return dataSource[this.algumModelo].destroy({where: {id:id}})
     }
+
+    async PegaUm(where) {
+        return dataSource[this.algumModelo].findOne({ where });
+    }
 };
 
 module.exports = Services;
