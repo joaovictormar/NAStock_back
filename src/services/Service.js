@@ -4,8 +4,8 @@ class Services {
     constructor(algumModelo) {
         this.algumModelo = algumModelo
     }
-    async PegaTodosOsRegistros() {
-        return dataSource[this.algumModelo].findAll()
+    async PegaTodosOsRegistros(options = {}) {
+        return dataSource[this.algumModelo].findAll(options)
     }
     async PegaUmRegistroPorId(id) {
         return dataSource[this.algumModelo].findByPk(id)
@@ -14,7 +14,7 @@ class Services {
         return dataSource[this.algumModelo].create(dadosDoRegistro)
     }
     async atualizaRegistro (dadosAtualizados, id) {
-        const listaDeRegistroAtualizados = dataSource[this.model].update(dadosAtualizados, {
+        const listaDeRegistroAtualizados = dataSource[this.algumModelo].update(dadosAtualizados, {
             where: {
                 id: id
             }

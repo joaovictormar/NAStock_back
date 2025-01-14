@@ -28,7 +28,7 @@ class Controller {
     async criaNovo (req, res) {
         const dadosParaCriacao = req.body;
         try {
-            const registroCriado = await this.algumServico.criaNovo(dadosParaCriacao)
+            const registroCriado = await this.algumServico.criaRegistro(dadosParaCriacao)
             return res.status(200).json(registroCriado)
         }
         catch (erro) {
@@ -40,7 +40,7 @@ class Controller {
         const {id} = req.params;
         const dadosAtualizados = req.body;
         try {
-            const registrosAtualizados = await this.algumServico.atualizaRegistros(dadosAtualizados, id)
+            const registrosAtualizados = await this.algumServico.atualizaRegistro(dadosAtualizados, id)
             if(!registrosAtualizados) {
                 return res.status(400).json({mensagem: `Erro ao atualizar registro`})
             }
