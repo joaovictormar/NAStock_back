@@ -31,6 +31,11 @@ class Services {
     async PegaUm(where) {
         return dataSource[this.algumModelo].findOne({ where });
     }
+
+    async contaRegistrosPorCampo(campo) {
+        return dataSource[this.algumModelo].count({ where: campo });
+    }
+    
 };
 
 module.exports = Services;
