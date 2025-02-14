@@ -14,11 +14,22 @@ class Controller {
     }
 
     async PegaUmRegistro (req, res) {
-            const {id} = req.params;
-        try {
-            const registro = await this.algumServico.PegaUmRegistroPorId(Number(id))
+            const {id, patrimonio_id} = req.params;
+
+            try {
+
+            let registro
+
+            if (id) {
+                registro = await this.algumServico.PegaUmRegistroPorId(Number(id))
+            }
+
+            else {
+                registro = await this.algumServico.PegaUm({ patrimonio_id: Number(patrimonio_id) })
+            }
+            
             return res.status(200).json(registro)
-            console.log(registro)
+
         }
         catch (erro) {
             res.status(500).json({mensagem: `Erro ao encontrar esse registro ${erro}`})
