@@ -3,7 +3,7 @@ const dataSource = require("../database/models");
 
 class EquipamentoService extends Services {
     constructor() {
-        super("Equipamento")
+        super("Equipamento");
     }
 
     async pegaQuantidadePorEquipamentoId(equipamento_id) {
