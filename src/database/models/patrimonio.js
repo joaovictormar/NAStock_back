@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Patrimonio.belongsTo(models.Equipamento, {
         foreignKey: 'equipamento_id'
+      });
+      Patrimonio.hasMany(models.Historico, {
+        foreignKey: 'patrimonio_id'
       })
     }
   }
