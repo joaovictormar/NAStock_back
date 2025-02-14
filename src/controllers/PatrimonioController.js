@@ -34,14 +34,14 @@ class PatrimonioController extends Controller {
             
             const patrimonioExistente = await patrimonioService.pegaUmRegistroPorCampo({ patrimonio });
             if (patrimonioExistente) {
-                return res.status(400).json({ error: 'Patrimônio já existe.' });
+                return res.status(400).json({ error: 'Este patrimônio já existe.' });
             }
 
             const quantidadeDePatrimoniosVinculadoAUmEquipamento = await patrimonioService.contaPatrimoniosVinculadosAosEquipamentos(equipamento_id) +1;
             const quantidadeDosEquipamentosDessePatrimonio = await equipamentoService.pegaQuantidadePorEquipamentoId(equipamento_id);
 
             if (quantidadeDePatrimoniosVinculadoAUmEquipamento > quantidadeDosEquipamentosDessePatrimonio) {
-                return res.status(400).json({ error: "Este equipamento atingiu o limite de patrimônios vinculados." });
+                return res.status(400).json({ error: `Este equipamento possui ${quantidadeDosEquipamentosDessePatrimonio} unidades que já estão vinculadas a algum patrimônio.` });
             }
 
             const newPatrimonio = await patrimonioService.criaRegistro({
@@ -52,7 +52,6 @@ class PatrimonioController extends Controller {
             });
 
             res.status(201).json(newPatrimonio);
-            console.log("Quantidade de patrimônios vinculados:", quantidadeDePatrimoniosVinculadoAUmEquipamento);
             
         } catch (error) {
             console.error('Erro ao criar patrimônio:', error);
