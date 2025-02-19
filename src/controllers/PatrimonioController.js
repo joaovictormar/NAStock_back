@@ -12,7 +12,7 @@ class PatrimonioController extends Controller {
     
     async PegaRegistrosDeEstoque(req, res) {
         try {
-            const registrosDeEstoque = await patrimonioService.PegaRegistrosPorLocal("Estoque");
+            const registrosDeEstoque = await patrimonioService.PegaTodosOsRegistros({where : {local: "Estoque"}});
             return res.status(200).json(registrosDeEstoque);
         } catch (erro) {
             res.status(500).json({ mensagem: `Erro ao buscar registros de estoque: ${erro.message}` });
@@ -21,7 +21,7 @@ class PatrimonioController extends Controller {
 
     async PegaRegistrosDeLocacao(req, res) {
         try {
-            const registrosDeEstoque = await patrimonioService.PegaRegistrosPorLocal("Locação");
+            const registrosDeEstoque = await patrimonioService.PegaTodosOsRegistros({where : {local: "Locação"}});
             return res.status(200).json(registrosDeEstoque);
         } catch (erro) {
             res.status(500).json({ mensagem: `Erro ao buscar registros de locação: ${erro.message}` });
@@ -32,12 +32,12 @@ class PatrimonioController extends Controller {
         const { equipamento_id, patrimonio, local, obs } = req.body;
         try {
             
-            const patrimonioExistente = await patrimonioService.pegaUmRegistroPorCampo({ patrimonio });
+            const patrimonioExistente = await patrimonioService.PegaUm({ patrimonio });
             if (patrimonioExistente) {
                 return res.status(400).json({ error: 'Este patrimônio já existe.' });
             }
 
-            const quantidadeDePatrimoniosVinculadoAUmEquipamento = await patrimonioService.contaPatrimoniosVinculadosAosEquipamentos(equipamento_id) +1;
+            const quantidadeDePatrimoniosVinculadoAUmEquipamento = await patrimonioService.contaRegistrosPorCampo({equipamento_id}) +1;
             const quantidadeDosEquipamentosDessePatrimonio = await equipamentoService.pegaQuantidadePorEquipamentoId(equipamento_id);
 
             if (quantidadeDePatrimoniosVinculadoAUmEquipamento > quantidadeDosEquipamentosDessePatrimonio) {
