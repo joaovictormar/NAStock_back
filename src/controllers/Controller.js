@@ -14,20 +14,10 @@ class Controller {
     }
 
     async PegaUmRegistro (req, res) {
-            const {id, patrimonio_id} = req.params;
+            const {id} = req.params;
 
             try {
-
-            let registro
-
-            if (id) {
-                registro = await this.algumServico.PegaUmRegistroPorId(Number(id))
-            }
-
-            else {
-                registro = await this.algumServico.PegaUm({ patrimonio_id: Number(patrimonio_id) })
-            }
-            
+            const registro = await this.algumServico.PegaUmRegistroPorId(Number(id))
             return res.status(200).json(registro)
 
         }
