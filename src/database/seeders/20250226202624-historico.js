@@ -5,9 +5,10 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('historicos', [
       {
-        patrimonio_id: 89,
+        patrimonio_id: 1,
         saida: "nasit",
         entrada: "guandu",
+        motivo: 'sem motivo',
         data: new Date().toISOString().split('T')[0],
         createdAt: new Date(),
         updatedAt: new Date()

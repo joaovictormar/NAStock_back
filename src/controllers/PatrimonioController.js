@@ -29,7 +29,7 @@ class PatrimonioController extends Controller {
     }
 
     async criaNovoPatrimonio(req, res) {
-        const { equipamento_id, patrimonio, local, obs } = req.body;
+        const { equipamento_id, patrimonio, local, obs, empresa } = req.body;
         try {
             
             const patrimonioExistente = await patrimonioService.PegaUm({ patrimonio });
@@ -48,7 +48,8 @@ class PatrimonioController extends Controller {
                 equipamento_id,
                 patrimonio,
                 local,
-                obs
+                obs,
+                empresa
             });
 
             res.status(201).json(newPatrimonio);

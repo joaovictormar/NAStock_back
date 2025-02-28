@@ -1,27 +1,42 @@
 'use strict';
+
+const equipamento = require('../models/equipamento');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('historicos', {
+    await queryInterface.createTable('patrimonios', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      patrimonio_id: {
+      equipamento_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'patrimonios', key: 'id' }
+        references: {
+          model: 'equipamentos',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
-      saida: {
+      patrimonio: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        unique: true 
+      },
+      local: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      entrada: {
+      empresa: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      data: {
-        type: Sequelize.DATEONLY
+      obs: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +49,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('historicos');
+    await queryInterface.dropTable('patrimonios');
   }
 };

@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Patrimonio.init({
     patrimonio: DataTypes.INTEGER,
     local: DataTypes.STRING,
+    empresa: DataTypes.STRING,
     obs: DataTypes.STRING
   }, {
     sequelize,

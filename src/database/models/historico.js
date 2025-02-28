@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   Historico.init({
     saida: DataTypes.STRING,
     entrada: DataTypes.STRING,
-    data: DataTypes.DATEONLY
+    data: DataTypes.DATEONLY,
+    motivo: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Historico',

@@ -8,6 +8,8 @@ module.exports = {
         equipamento_id: 2,
         patrimonio: 14, 
         local: 'Estoque',
+        obs: 'Sem obs',
+        empresa: 'Guandu',
         createdAt: new Date(),
         updatedAt: new Date()
     },
@@ -16,6 +18,7 @@ module.exports = {
         patrimonio: 1140, 
         local: 'Estoque',
         obs: 'Em uso',
+        empresa: 'CCM',
         createdAt: new Date(),
         updatedAt: new Date()
     }
