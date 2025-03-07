@@ -29,29 +29,28 @@ class PatrimonioController extends Controller {
     }
 
     async criaNovoPatrimonio(req, res) {
-        const { equipamento_id, patrimonio, local, obs, empresa } = req.body;
+        const { equipamento_id, local, obs, empresa } = req.body;
+    
         try {
+            const ultimoPatrimonio = await patrimonioService.PegaUltimoPatrimonio();
             
-            const patrimonioExistente = await patrimonioService.PegaUm({ patrimonio });
-            if (patrimonioExistente) {
-                return res.status(400).json({ error: 'Este patrimônio já existe.' });
-            }
-
-            const quantidadeDePatrimoniosVinculadoAUmEquipamento = await patrimonioService.contaRegistrosPorCampo({equipamento_id}) +1;
+            const proximoNumero = ultimoPatrimonio ? String(parseInt(ultimoPatrimonio) + 1).padStart(4, "0") : "0001";
+    
+            const quantidadeDePatrimoniosVinculadoAUmEquipamento = await patrimonioService.contaRegistrosPorCampo({ equipamento_id }) + 1;
             const quantidadeDosEquipamentosDessePatrimonio = await equipamentoService.pegaQuantidadePorEquipamentoId(equipamento_id);
-
+    
             if (quantidadeDePatrimoniosVinculadoAUmEquipamento > quantidadeDosEquipamentosDessePatrimonio) {
                 return res.status(400).json({ error: `Este equipamento possui ${quantidadeDosEquipamentosDessePatrimonio} unidades que já estão vinculadas a algum patrimônio.` });
             }
-
+    
             const newPatrimonio = await patrimonioService.criaRegistro({
                 equipamento_id,
-                patrimonio,
+                patrimonio: proximoNumero, 
                 local,
                 obs,
                 empresa
             });
-
+    
             res.status(201).json(newPatrimonio);
             
         } catch (error) {
@@ -59,6 +58,7 @@ class PatrimonioController extends Controller {
             res.status(500).json({ error: `Erro ao criar patrimônio: ${error.message}` });
         }
     }
+    
 }
 
 module.exports = PatrimonioController;

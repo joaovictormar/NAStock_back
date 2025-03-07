@@ -6,6 +6,13 @@ class PatrimonioService extends Services {
         super("Patrimonio");
     }
 
+    async PegaUltimoPatrimonio() {
+        const ultimoPatrimonio = await dataSource.Patrimonio.findOne({
+            order: [["id", "DESC"]],
+        });
+
+        return ultimoPatrimonio ? ultimoPatrimonio.patrimonio : null;
+    }
 }
 
 module.exports = PatrimonioService;
