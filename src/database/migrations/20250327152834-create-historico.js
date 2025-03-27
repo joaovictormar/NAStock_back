@@ -20,11 +20,17 @@ module.exports = {
       entrada: {
         type: Sequelize.STRING
       },
+      data: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
       motivo: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      data: {
-        type: Sequelize.DATEONLY
+      alteracao: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
