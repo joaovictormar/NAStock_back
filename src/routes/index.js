@@ -1,14 +1,16 @@
 const express = require("express");
 const equipamentos = require("./EquipamentosRoutes.js");
 const patrimonios = require("./PatrimoniosRoutes.js");
-const historico = require("./HistoricoRoutes.js");
+const historicos = require("./HistoricoRoutes.js");
+const clientes = require("./ClienteRoutes.js");
 
 const rotas = (app) => {
     app.use(
         express.json(),
         equipamentos,
         patrimonios,
-        historico
+        historicos,
+        clientes
     );
 };
 
