@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   Historico.init({
     saida: DataTypes.STRING,
     entrada: DataTypes.STRING,
-    data: DataTypes.DATE,
+    data: DataTypes.DATEONLY,
     motivo: DataTypes.STRING,
     alteracao: DataTypes.STRING
   }, {

@@ -1,8 +1,8 @@
-const services = require("../services/ClienteService.js");
+const Services = require("../services/Service.js");
 const dataSource = require("../database/models");
 
-class ClienteService extends services {
-    constructror(){
+class ClienteService extends Services {
+    constructor(){
         super("Cliente")
     }
 };

@@ -50,11 +50,11 @@ module.exports = {
       },
       entrada: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       garantia: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       createdAt: {
         allowNull: false,

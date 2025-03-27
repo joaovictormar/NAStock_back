@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     memoria: DataTypes.STRING,
     disco: DataTypes.STRING,
     serial: DataTypes.STRING,
-    entrada: DataTypes.DATE,
-    garantia: DataTypes.DATE
+    entrada: DataTypes.DATEONLY,
+    garantia: DataTypes.DATEONLY
   }, {
     sequelize,
     modelName: 'Patrimonio',
