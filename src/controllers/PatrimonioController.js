@@ -29,7 +29,7 @@ class PatrimonioController extends Controller {
     }
 
     async criaNovoPatrimonio(req, res) {
-        const { equipamento_id, local, obs, empresa, serial, garantia, entrada } = req.body;
+        const { equipamento_id, local, obs, empresa, serial, garantia, entrada, memoria, disco } = req.body;
     
         try {
             const ultimoPatrimonio = await patrimonioService.PegaUltimoPatrimonio();
@@ -50,6 +50,8 @@ class PatrimonioController extends Controller {
                 obs,
                 empresa,
                 serial,
+                memoria,
+                disco,
                 garantia,
                 entrada
             });
